@@ -1,14 +1,8 @@
-const btns = document.querySelectorAll('.store__header-btn');
+import {storeHeaderControl} from './modules/control/storeHeaderControle.js';
 
-const changeActiveBtn = ({target}) => {
-  btns.forEach(btn => {
-    btn.classList.remove('store__header-btn--active');
-  });
-
-  target.classList.add('store__header-btn--active');
+const init = () => {
+  storeHeaderControl();
 };
 
-btns.forEach(btn => {
-  btn.addEventListener('click', changeActiveBtn);
-});
 
+init();
