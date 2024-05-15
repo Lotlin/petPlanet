@@ -8,6 +8,7 @@
     margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__header-list {
@@ -45,17 +46,47 @@
   }
 
   &__cart-btn {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 28px;
   }
 
+  &__cart-cnt {
+    position: relative;
+    z-index: 2;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    color: $light;
+  }
+
+  &__cart-icon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+
   &__title {
+    margin-bottom: 32px;
+    font-size: 52px;
+    color: $green;
   }
 
   &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 420px);
+    gap: 20px;
+    justify-content: center;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__item {
-  }
-
-  &__product {
+    display: flex;
+    justify-content: center;
   }
 }
