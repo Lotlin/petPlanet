@@ -7,5 +7,7 @@
 @use "components/footer";
 @use "components/store";
 @use "components/product";
+@use "components/modal-overlay";
+@use "components//modal-cart";
 
 @import "normalize.css";

@@ -1,6 +1,7 @@
 
-import {btnsStoreHeader} from '../getElements.js';
+import {btnsStoreHeader, cartBtn} from '../getElements.js';
 import {renderCategoryProducts} from '../render/renderProducts.js';
+import {openCart} from './cartControl.js';
 
 const changeStoreHeaderActiveBtn = (target) => {
   btnsStoreHeader.forEach(btn => {
@@ -10,12 +11,17 @@ const changeStoreHeaderActiveBtn = (target) => {
   target.classList.add('store__header-btn--active');
 };
 
+const headerCartBtnControl = () => {
+  cartBtn.addEventListener('click', openCart);
+};
+
 export const storeHeaderControl = () => {
   btnsStoreHeader.forEach(btn => {
     btn.addEventListener('click', async ({target}) => {
       changeStoreHeaderActiveBtn(target);
-      const rusCategotyName = btn.textContent.trim();
-      await renderCategoryProducts(rusCategotyName);
+      await renderCategoryProducts(btn.textContent);
     });
   });
+
+  headerCartBtnControl();
 };

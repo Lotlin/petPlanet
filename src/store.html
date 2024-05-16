@@ -44,27 +44,19 @@
         <div class="store__header">
           <ul class="store__header-list">
             <li class="store__header-item">
-              <button class="store__header-btn store__header-btn--active">
-                Домики
-              </button>
+              <button class="store__header-btn store__header-btn--active">Домики</button>
             </li>
   
             <li class="store__header-tem">
-              <button class="store__header-btn">
-                Лежанки
-              </button>
+              <button class="store__header-btn">Лежанки</button>
             </li>
   
             <li class="store__header-item">
-              <button class="store__header-btn">
-                Игрушки
-              </button>
+              <button class="store__header-btn">Игрушки</button>
             </li>
   
             <li class="store__header-item">
-              <button class="store__header-btn">
-                Корма
-              </button>
+              <button class="store__header-btn">Корма</button>
             </li>
           </ul>
   
@@ -148,6 +140,28 @@
       </address>
     </div>
   </footer>
+  
+  <div class="modal-overlay">
+    <div class="modal-cart">
+      <div class="modal-cart__content">
+        <h2 class="modal-cart__title">Корзина</h2>
+
+        <ul class="modal-cart__list">
+          <li class="modal-cart__item cart-item">
+            <img class="cart-item__img" src="/img/photo-1.jpg" alt="Домик-конус для питомцев">
+            <h3 class="cart-item__title">Домик-конус для питомцев</h3>
+
+            <div class="cart-item__num-wrapper">
+              <button class="cart-item__num-btn cart-item__num-btn--minus">-</button>
+              <div class="cart-item__num">1</div>
+              <button class="cart-item__num-btn cart-item__num-btn--plus">+</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <button class="modal-overlay__close-btn">&times;</button>
+  </div>
 </body>
 
 </html>

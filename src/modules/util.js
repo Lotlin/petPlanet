@@ -5,3 +5,10 @@ export const createElement = (tagName, attributesObj) => {
 
   return elem;
 };
+
+export const getLocalStorageCartItems = () =>
+  JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+export const updateLocalStorageCartItem = (cartItems) => {
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+};
