@@ -153,11 +153,50 @@
 
             <div class="cart-item__num-wrapper">
               <button class="cart-item__num-btn cart-item__num-btn--minus">-</button>
-              <div class="cart-item__num">1</div>
+              <span class="cart-item__num">1</span>
               <button class="cart-item__num-btn cart-item__num-btn--plus">+</button>
             </div>
+
+            <p class="cart-item__price">5700&nbsp;₽</p>
+          </li>
+
+          <li class="modal-cart__item cart-item">
+            <img class="cart-item__img" src="/img/photo-2.jpg" alt="Домик-конус для питомцев">
+            <h3 class="cart-item__title">Домик-конус для питомцев</h3>
+
+            <div class="cart-item__num-wrapper">
+              <button class="cart-item__num-btn cart-item__num-btn--minus">-</button>
+              <span class="cart-item__num">1</span>
+              <button class="cart-item__num-btn cart-item__num-btn--plus">+</button>
+            </div>
+
+            <p class="cart-item__price">5700&nbsp;₽</p>
           </li>
         </ul>
+
+        <form class="modal-cart__form" action="#">
+          <fieldset class="modal-cart__fieldset">
+            <legend class="modal-cart__legend">Самовывоз из магазина:</legend>
+
+            <label class="modal-cart__radio radio">ул. Адамавая 45/1
+              <input class="radio__input" type="radio" name="store" value="1" checked>
+            </label>
+            
+            <label class="modal-cart__radio radio">ул. Вишневая 74
+              <input class="radio__input" type="radio" name="store" value="2">
+            </label>
+            
+            <label class="modal-cart__radio radio">ул. Чехова 106/28
+              <input class="radio__input" type="radio" name="store" value="3">
+            </label>
+          </fieldset>
+        </form>
+
+        <div class="modal-cart__footer">
+          <button class="modal-cart__btn">Заказать</button>
+
+          <p class="modal-cart__total-price">0&nbsp;₽</p>
+        </div>
       </div>
     </div>
     <button class="modal-overlay__close-btn">&times;</button>

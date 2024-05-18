@@ -1,54 +1,86 @@
 @use "../variables" as *;
+@use "../media" as *;
 
 .modal-cart {
-  z-index: 999;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  margin: auto;
   max-width: 676px;
   width: 100%;
   min-height: 459px;
-  padding: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: $white;
   border-radius: 24px;
   box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 48%;
+    background-image: url('/img/cart-img.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    width: 52%;
+    padding: 24px;
   }
 
   &__title {
+    margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: 400;
   }
 
   &__list {
+    flex-grow: 1;
+    margin-bottom: 24px;
   }
 
-  &__item {
-  }
-}
-.cart-item {
-
-  &__img {
+  &__form {
   }
 
-  &__title {
+  &__fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+    margin-bottom: 16px;
   }
 
-  &__num-wrapper {
+  &__legend {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 700;
   }
 
-  &__num-btn {
-
-    &--minus {
-    }
-
-    &--plus {
-    }
+  &__radio {
+    display: block;
+    font-size: 16px;
   }
 
-  &__num {
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__btn {
+    width: 121px;
+    height: 46px;
+    padding: 12px 24px;
+    background-color: $purple;
+    border-radius: 40px;
+    color: $light;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &__total-price {
+    color: $purple;
+    font-size: 16px;
+    font-weight: 700;
   }
 }

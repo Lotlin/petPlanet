@@ -1,0 +1,62 @@
+@use "../variables" as *;
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 54px 1fr max-content;
+  grid-template-areas: 
+  "img title title"
+  "img num price";
+  gap: 8px 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(#2e3514, 0.04);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  &__img {
+    grid-area: img;
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+    object-position: center;
+    align-self: center;
+  }
+
+  &__title {
+    grid-area: title;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  &__num-wrapper {
+    grid-area: num;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    min-width: 70px;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  &__num-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid $green;
+    border-radius: 6px;
+    color: inherit;
+  }
+
+  &__num {
+  }
+
+  &__price {
+    grid-area: price;
+    font-size: 16px;
+  }
+}
