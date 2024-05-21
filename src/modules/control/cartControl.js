@@ -1,20 +1,39 @@
-import {modalOverlay, modalOverlayCloseBtn} from '../getElements.js';
-import {renderCartItems} from '../render/renderCartItems.js';
+import {
+  modalOverlay, modalOverlayCloseBtn, storeProductList,
+} from '../getElements.js';
+import {renderCart} from '../render/renderCart.js';
+import {addToCart, updateCartCount} from '../service/cartServise.js';
 
 export const openCart = () => {
   modalOverlay.classList.add('modal-overlay--active');
 
-  renderCartItems();
+  renderCart();
 };
 
 export const closeCart = () => {
   modalOverlay.classList.remove('modal-overlay--active');
 };
 
-export const cartControl = () => {
+const addToCartControl = () => {
+  storeProductList.addEventListener('click', ({target}) => {
+    if (target.closest('.product__add-cart-btn')) {
+      const productId = parseInt(target.dataset.id);
+
+      addToCart(productId);
+      updateCartCount();
+    }
+  });
+};
+
+const closeCartControl = () => {
   modalOverlay.addEventListener('click', ({target}) => {
     if (target === modalOverlay || target === modalOverlayCloseBtn) {
       closeCart();
     }
   });
+};
+
+export const cartControl = () => {
+  addToCartControl();
+  closeCartControl();
 };

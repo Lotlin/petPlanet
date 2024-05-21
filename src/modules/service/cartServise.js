@@ -1,5 +1,8 @@
-import {cartCount, storeProductList} from '../getElements.js';
-import {getLocalStorageCartItems, updateLocalStorageCartItem} from '../util.js';
+import {cartCount} from '../getElements.js';
+import {
+  getLocalStorageCartItems, updateLocalStorageCartItem, setProductCount,
+} from '../util.js';
+import {fetchAllProductsById} from './fetch';
 
 export const updateCartCount = () => {
   const cartItems = getLocalStorageCartItems();
@@ -7,23 +10,39 @@ export const updateCartCount = () => {
   cartCount.textContent = cartItems.length;
 };
 
-
-export const addToCart = (productName) => {
+export const addToCart = (producId) => {
   const cartItems = getLocalStorageCartItems();
-  cartItems.push(productName);
 
-  updateLocalStorageCartItem(cartItems);
+  updateLocalStorageCartItem(cartItems, producId);
 };
 
-export const addToCartControl = () => {
-  storeProductList.addEventListener('click', ({target}) => {
-    if (target.closest('.product__add-cart-btn')) {
-      const choosenProductCart = target.closest('.product');
-      const productName =
-        choosenProductCart.querySelector('.product__title').textContent;
+export const getCartItemsFetchData = async () => {
+  let allProductsData = [];
 
-      addToCart(productName);
-      updateCartCount();
-    }
+  const catrtItems = getLocalStorageCartItems();
+
+  const allCartItemsId = catrtItems.map(item => item.id);
+
+  if (allCartItemsId) {
+    allProductsData = await fetchAllProductsById(allCartItemsId);
+  }
+
+  return allProductsData;
+};
+
+export const updateCountFetchedItems = async () => {
+  const localStorageCartItems = getLocalStorageCartItems();
+
+  if (!localStorageCartItems.length) {
+    return [];
+  }
+
+  const productsFetchData = await getCartItemsFetchData();
+
+  productsFetchData.forEach(fetchItem => {
+    setProductCount(localStorageCartItems, fetchItem);
   });
+
+  return productsFetchData;
 };
+

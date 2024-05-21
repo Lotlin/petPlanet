@@ -1,9 +1,9 @@
 import {API_URL} from '../components/API.js';
 import {storeProductList} from '../getElements.js';
-import {fetchProductsByCategory} from '../service/fetchProductsByCategory.js';
+import {fetchProductsByCategory} from '../service/fetch.js';
 import {createElement} from '../util.js';
 
-const renderProductCard = ({photoUrl, name, price}) => {
+const renderProductCard = ({photoUrl, name, price, id}) => {
   const productElem = createElement('li', {
     classList: 'store__item',
   });
@@ -34,6 +34,8 @@ const renderProductCard = ({photoUrl, name, price}) => {
     classList: 'product__add-cart-btn',
     textContent: 'Заказать',
   });
+
+  btn.dataset.id = id;
 
   article.append(img, title, priceElem, btn);
 
