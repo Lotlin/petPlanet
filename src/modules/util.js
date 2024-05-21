@@ -24,13 +24,13 @@ export const updateLocalStorageCartItem = (cartItems, producId) => {
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
 };
 
-export const getLocalStorageCartProductDetais = () => {
+/*export const getLocalStorageCartProductDetais = () => {
   JSON.parse(localStorage.getItem('CartProductDetais' || '[]'));
-};
+};*/
 
-export const updateLocalStorageCartProductDetais = (cartProductDetails) => {
+/*export const updateLocalStorageCartProductDetais = (cartProductDetails) => {
   localStorage.setItem('CartProductDetais', JSON.stringify(cartProductDetails));
-};
+};*/
 
 export const isTheSameProduct = (localStorageCartItems, productId) =>
   localStorageCartItems.find(

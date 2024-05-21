@@ -1,7 +1,9 @@
 import {API_URL} from '../components/API.js';
-import {cartItemsList} from '../getElements.js';
+import {cartItemsList, cartTotalPrice} from '../getElements.js';
 import {createElement} from '../util.js';
-import {updateCountFetchedItems} from '../service/cartServise.js';
+import {
+  countCartPrices, updateCountFetchedItems,
+} from '../service/cartServise.js';
 
 const renderCartItem = ({photoUrl, name, count, price}) => {
   const item = createElement('li', {
@@ -42,7 +44,7 @@ const renderCartItem = ({photoUrl, name, count, price}) => {
 
   const priceElem = createElement('p', {
     classList: 'cart-item__price',
-    textContent: `${price}\u00A0₽`,
+    textContent: `${price * count}\u00A0₽`,
   });
 
   item.append(img, title, numWrapper, priceElem);
@@ -58,11 +60,15 @@ const renderCartIsEmptyMessage = () => {
   cartItemsList.append(message);
 };
 
-export const renderCartItems = async (cartItemsArray) => {
+const renderCartItems = async (cartItemsArray) => {
   cartItemsArray.forEach(item => {
     const itemELem = renderCartItem(item);
     cartItemsList.append(itemELem);
   });
+};
+
+export const renderTotalPrice = (cartItemsData) => {
+  cartTotalPrice.textContent = `${countCartPrices(cartItemsData)}\u00A0₽`;
 };
 
 export const renderCart = async () => {
@@ -77,4 +83,5 @@ export const renderCart = async () => {
   }
 
   renderCartItems(cartItemsData);
+  renderTotalPrice(cartItemsData);
 };

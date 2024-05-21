@@ -46,3 +46,24 @@ export const updateCountFetchedItems = async () => {
   return productsFetchData;
 };
 
+export const countCartPrices = (cartItemsData) =>
+  cartItemsData.reduce((acc, item) => acc + (item.price * item.count), 0);
+
+export const getElemPrice = (priceElem) =>
+  priceElem.textContent.split('\u00A0')[0];
+
+export const updateItemPriceAndCount =
+  (priceElem, countElem, operator = false) => {
+    const currentPrice = Number(getElemPrice(priceElem));
+    const currentCount = Number(countElem.textContent);
+
+    const oneItemPrice = currentPrice / currentCount;
+
+    const newCount = operator ? (currentCount + 1) : (currentCount - 1);
+    countElem.textContent = newCount;
+
+    priceElem.textContent = `${newCount * oneItemPrice}\u00A0₽`;
+
+  // toDO updateLocalStorageCartItem
+  // toDo totalPrice
+  };

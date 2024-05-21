@@ -1,8 +1,11 @@
 import {
+  getItemPrice, getItemCount,
   modalOverlay, modalOverlayCloseBtn, storeProductList,
 } from '../getElements.js';
 import {renderCart} from '../render/renderCart.js';
-import {addToCart, updateCartCount} from '../service/cartServise.js';
+import {
+  addToCart, updateCartCount, updateItemPriceAndCount,
+} from '../service/cartServise.js';
 
 export const openCart = () => {
   modalOverlay.classList.add('modal-overlay--active');
@@ -33,7 +36,20 @@ const closeCartControl = () => {
   });
 };
 
+const addCountBtnControl = () => {
+  modalOverlay.addEventListener('click', ({target}) => {
+    if (target.classList.contains('cart-item__num-btn--plus')) {
+      const parentItem = target.closest('.cart-item');
+      const priceElem = getItemPrice(parentItem);
+      const countElem = getItemCount(parentItem);
+
+      updateItemPriceAndCount(priceElem, countElem, true);
+    }
+  });
+};
+
 export const cartControl = () => {
   addToCartControl();
   closeCartControl();
+  addCountBtnControl();
 };
