@@ -6,7 +6,7 @@ import {renderCart, renderTotalPrice} from '../render/renderCart.js';
 import {
   addToCart, updateCartCount, updateItemPriceAndCount, getItemId,
   getElemPrice, getLocalStorageCartItems, increaseCountLocalStorageCartItem,
-  reduceCountLocalStorageCartItem,
+  reduceCountLocalStorageCartItem, isCoutBtnClicked,
 } from '../service/cartServise.js';
 
 export const openCart = () => {
@@ -43,37 +43,25 @@ const closeCartControl = () => {
   });
 };
 
-const increaseCountBtnControl = () => {
+export const countBtnControl = () => {
   modalOverlay.addEventListener('click', ({target}) => {
-    if (target.classList.contains('cart-item__num-btn--plus')) {
+    const clickeCountdBtn = isCoutBtnClicked(target);
+
+    if (clickeCountdBtn) {
       const parentItem = target.closest('.cart-item');
       const priceElem = getItemPriceElem(parentItem);
       const countElem = getItemCount(parentItem);
       const itemId = getItemId(parentItem);
 
       const cartItems = getLocalStorageCartItems();
-      increaseCountLocalStorageCartItem(cartItems, itemId);
 
-      updateItemPriceAndCount(parentItem, priceElem, countElem, 'increase');
-
-      const newCartItems = getLocalStorageCartItems();
-      renderTotalPrice(newCartItems);
-    }
-  });
-};
-
-const reduceCountBtnControl = () => {
-  modalOverlay.addEventListener('click', ({target}) => {
-    if (target.classList.contains('cart-item__num-btn--minus')) {
-      const parentItem = target.closest('.cart-item');
-      const priceElem = getItemPriceElem(parentItem);
-      const countElem = getItemCount(parentItem);
-      const itemId = getItemId(parentItem);
-
-      const cartItems = getLocalStorageCartItems();
-      reduceCountLocalStorageCartItem(cartItems, itemId);
-
-      updateItemPriceAndCount(parentItem, priceElem, countElem);
+      if (clickeCountdBtn === 'increase') {
+        increaseCountLocalStorageCartItem(cartItems, itemId);
+        updateItemPriceAndCount(parentItem, priceElem, countElem, 'increase');
+      } else {
+        reduceCountLocalStorageCartItem(cartItems, itemId);
+        updateItemPriceAndCount(parentItem, priceElem, countElem);
+      }
 
       const newCartItems = getLocalStorageCartItems();
       renderTotalPrice(newCartItems);
@@ -84,6 +72,5 @@ const reduceCountBtnControl = () => {
 export const cartControl = () => {
   addToCartControl();
   closeCartControl();
-  increaseCountBtnControl();
-  reduceCountBtnControl();
+  countBtnControl();
 };

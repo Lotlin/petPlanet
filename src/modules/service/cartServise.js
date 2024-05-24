@@ -127,3 +127,17 @@ export const updateItemPriceAndCount =
 
     priceElem.textContent = `${newCount * oneItemPrice}\u00A0₽`;
   };
+
+export const isCoutBtnClicked = (target) => {
+  let clickedBtn = false;
+
+  if (target.classList.contains('cart-item__num-btn--minus')) {
+    clickedBtn = 'reduce';
+  }
+
+  if (target.classList.contains('cart-item__num-btn--plus')) {
+    clickedBtn = 'increase';
+  }
+
+  return clickedBtn;
+}
