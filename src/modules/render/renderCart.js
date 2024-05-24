@@ -5,10 +5,12 @@ import {
   countCartPrices, updateCountFetchedItems,
 } from '../service/cartServise.js';
 
-const renderCartItem = ({photoUrl, name, count, price}) => {
+const renderCartItem = ({photoUrl, name, count, price, id}) => {
   const item = createElement('li', {
     classList: 'modal-cart__item cart-item',
   });
+
+  item.dataset.id = id;
 
   const img = createElement('img', {
     className: 'cart-item__img',
@@ -52,7 +54,7 @@ const renderCartItem = ({photoUrl, name, count, price}) => {
   return item;
 };
 
-const renderCartIsEmptyMessage = () => {
+export const renderCartIsEmptyMessage = () => {
   const message = createElement('li', {
     textContent: 'Корзина пуста',
   });

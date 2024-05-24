@@ -1,8 +1,58 @@
 import {cartCount} from '../getElements.js';
-import {
-  getLocalStorageCartItems, updateLocalStorageCartItem, setProductCount,
-} from '../util.js';
 import {fetchAllProductsById} from './fetch';
+import {renderCartIsEmptyMessage} from '../render/renderCart';
+
+export const isTheSameProduct = (localStorageCartItems, productId) =>
+  localStorageCartItems.find(
+      (localStorageItem) => localStorageItem.id === Number(productId),
+  );
+
+export const setProductCount = (localStorageCartItems, product) => {
+  const sameProductInLS = isTheSameProduct(localStorageCartItems, product.id);
+
+  if (sameProductInLS) {
+    product.count = sameProductInLS.count;
+  }
+};
+
+export const getLocalStorageCartItems = () =>
+  JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+export const getProductInCart = (cartItems, productId) =>
+  cartItems.find((item) => item.id === productId);
+
+export const addProductToLocalStorage = (cartItems, producId, productPrice) => {
+  const productInCart = getProductInCart(cartItems, producId);
+
+  if (productInCart) {
+    productInCart.count += 1;
+  } else {
+    cartItems.push({id: producId, count: 1, price: productPrice});
+  }
+
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+};
+
+export const increaseCountLocalStorageCartItem = (cartItems, itemId) => {
+  const itemInCart = getProductInCart(cartItems, itemId);
+
+  itemInCart.count += 1;
+
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+};
+
+export const reduceCountLocalStorageCartItem = (cartItems, itemId) => {
+  const itemInCart = getProductInCart(cartItems, itemId);
+
+  if (itemInCart.count === 1) {
+    cartItems = cartItems.filter((item) => item.id !== itemInCart.id);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    return;
+  }
+
+  itemInCart.count -= 1;
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+};
 
 export const updateCartCount = () => {
   const cartItems = getLocalStorageCartItems();
@@ -10,10 +60,10 @@ export const updateCartCount = () => {
   cartCount.textContent = cartItems.length;
 };
 
-export const addToCart = (producId) => {
+export const addToCart = (producId, productPrice) => {
   const cartItems = getLocalStorageCartItems();
 
-  updateLocalStorageCartItem(cartItems, producId);
+  addProductToLocalStorage(cartItems, producId, productPrice);
 };
 
 export const getCartItemsFetchData = async () => {
@@ -52,10 +102,23 @@ export const countCartPrices = (cartItemsData) =>
 export const getElemPrice = (priceElem) =>
   priceElem.textContent.split('\u00A0')[0];
 
+export const getItemId = (itemElem) => parseInt(itemElem.dataset.id);
+
 export const updateItemPriceAndCount =
-  (priceElem, countElem, operator = false) => {
+  (parentItem, priceElem, countElem, operator = false) => {
     const currentPrice = Number(getElemPrice(priceElem));
     const currentCount = Number(countElem.textContent);
+
+    if (currentCount === 1 && !operator) {
+      parentItem.remove();
+
+      const сartItems = getLocalStorageCartItems();
+      if (!сartItems.length) {
+        renderCartIsEmptyMessage();
+      }
+
+      return;
+    }
 
     const oneItemPrice = currentPrice / currentCount;
 
@@ -63,7 +126,4 @@ export const updateItemPriceAndCount =
     countElem.textContent = newCount;
 
     priceElem.textContent = `${newCount * oneItemPrice}\u00A0₽`;
-
-  // toDO updateLocalStorageCartItem
-  // toDo totalPrice
   };
