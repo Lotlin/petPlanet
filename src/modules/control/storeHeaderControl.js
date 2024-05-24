@@ -1,7 +1,7 @@
 
-import {btnsStoreHeader, cartBtn} from '../getElements.js';
-import {renderCategoryProducts} from '../render/renderProducts.js';
-import {openCart} from './cartControl.js';
+import {btnsStoreHeader, cartBtn} from '../getElements';
+import {renderCategoryProducts} from '../render/renderProducts';
+import {openCart} from './cartControl';
 
 const changeStoreHeaderActiveBtn = (target) => {
   btnsStoreHeader.forEach(btn => {

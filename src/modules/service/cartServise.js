@@ -1,4 +1,4 @@
-import {cartCount} from '../getElements.js';
+import {cartCount} from '../getElements';
 import {fetchAllProductsById} from './fetch';
 import {renderCartIsEmptyMessage} from '../render/renderCart';
 
@@ -140,4 +140,4 @@ export const isCoutBtnClicked = (target) => {
   }
 
   return clickedBtn;
-}
+};

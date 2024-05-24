@@ -1,9 +1,9 @@
-import {API_URL} from '../components/API.js';
-import {cartItemsList, cartTotalPrice} from '../getElements.js';
-import {createElement} from '../util.js';
+import {API_URL} from '../components/API';
+import {cartItemsList, cartTotalPrice} from '../getElements';
+import {createElement} from '../util';
 import {
   countCartPrices, updateCountFetchedItems,
-} from '../service/cartServise.js';
+} from '../service/cartServise';
 
 const renderCartItem = ({photoUrl, name, count, price, id}) => {
   const item = createElement('li', {

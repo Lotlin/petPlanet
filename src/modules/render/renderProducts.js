@@ -1,7 +1,7 @@
-import {API_URL} from '../components/API.js';
-import {storeProductList} from '../getElements.js';
-import {fetchProductsByCategory} from '../service/fetch.js';
-import {createElement} from '../util.js';
+import {API_URL} from '../components/API';
+import {storeProductList} from '../getElements';
+import {fetchProductsByCategory} from '../service/fetch';
+import {createElement} from '../util';
 
 const renderProductCard = ({photoUrl, name, price, id}) => {
   const productElem = createElement('li', {

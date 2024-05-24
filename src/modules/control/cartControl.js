@@ -1,13 +1,13 @@
 import {
   getItemPriceElem, getItemCount, getStoreProductPrice,
   modalOverlay, modalOverlayCloseBtn, storeProductList,
-} from '../getElements.js';
-import {renderCart, renderTotalPrice} from '../render/renderCart.js';
+} from '../getElements';
+import {renderCart, renderTotalPrice} from '../render/renderCart';
 import {
   addToCart, updateCartCount, updateItemPriceAndCount, getItemId,
   getElemPrice, getLocalStorageCartItems, increaseCountLocalStorageCartItem,
   reduceCountLocalStorageCartItem, isCoutBtnClicked,
-} from '../service/cartServise.js';
+} from '../service/cartServise';
 
 export const openCart = () => {
   modalOverlay.classList.add('modal-overlay--active');
