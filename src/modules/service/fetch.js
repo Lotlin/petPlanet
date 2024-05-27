@@ -18,10 +18,10 @@ export const fetchProductsByCategory = async (category) => {
   }
 };
 
-export const fetchAllProductsById = async (productsId) => {
+export const fetchAllProductsById = async (productsIds) => {
   try {
     const response = await fetch(
-        `${API_URL}/${GET_ALL_PRODUCTS_URL}/${productsId.join(',')}`,
+        `${API_URL}/${GET_ALL_PRODUCTS_URL}/${productsIds.join(',')}`,
     );
 
     if (!response.ok) {

@@ -41,23 +41,24 @@ export const increaseCountLocalStorageCartItem = (cartItems, itemId) => {
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
 };
 
+export const updateCartCount = () => {
+  const cartItems = getLocalStorageCartItems();
+
+  cartCount.textContent = cartItems.length;
+};
+
 export const reduceCountLocalStorageCartItem = (cartItems, itemId) => {
   const itemInCart = getProductInCart(cartItems, itemId);
 
   if (itemInCart.count === 1) {
     cartItems = cartItems.filter((item) => item.id !== itemInCart.id);
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    updateCartCount();
     return;
   }
 
   itemInCart.count -= 1;
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
-};
-
-export const updateCartCount = () => {
-  const cartItems = getLocalStorageCartItems();
-
-  cartCount.textContent = cartItems.length;
 };
 
 export const addToCart = (producId, productPrice) => {
@@ -71,10 +72,10 @@ export const getCartItemsFetchData = async () => {
 
   const catrtItems = getLocalStorageCartItems();
 
-  const allCartItemsId = catrtItems.map(item => item.id);
+  const allCartItemsIds = catrtItems.map(item => item.id);
 
-  if (allCartItemsId) {
-    allProductsData = await fetchAllProductsById(allCartItemsId);
+  if (allCartItemsIds) {
+    allProductsData = await fetchAllProductsById(allCartItemsIds);
   }
 
   return allProductsData;
