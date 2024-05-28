@@ -1,12 +1,12 @@
 import {
   getItemPriceElem, getItemCount, getStoreProductPrice,
-  modalOverlay, modalOverlayCloseBtn, storeProductList,
+  modalOverlay, modalOverlayCloseBtn, storeProductList, cartForm,
 } from '../getElements';
 import {renderCart, renderTotalPrice} from '../render/renderCart';
 import {
   addToCart, updateCartCount, updateItemPriceAndCount, getItemId,
   getElemPrice, getLocalStorageCartItems, increaseCountLocalStorageCartItem,
-  reduceCountLocalStorageCartItem, isCoutBtnClicked,
+  reduceCountLocalStorageCartItem, isCoutBtnClicked, submitOrder,
 } from '../service/cartServise';
 
 export const openCart = () => {
@@ -69,8 +69,13 @@ export const countBtnControl = () => {
   });
 };
 
+export const cartSubmitControl = () => {
+  cartForm.addEventListener('submit', submitOrder);
+};
+
 export const cartControl = () => {
   addToCartControl();
   closeCartControl();
   countBtnControl();
+  cartSubmitControl();
 };

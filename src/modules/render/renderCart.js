@@ -87,3 +87,24 @@ export const renderCart = async () => {
   renderCartItems(cartItemsData);
   renderTotalPrice(cartItemsData);
 };
+
+export const renderOrderMessage = (orderId) => {
+  const orderMessageWrapper = createElement('div', {
+    className: 'order-message',
+  });
+
+  const orderMessageText = createElement('p', {
+    className: 'order-message__text',
+    textContent: `Ваш заказ с номером ${orderId} принят.
+      Вы можете его забрать завтра после 12:00.`,
+  });
+
+  const orderMessageColseBtn = createElement('button', {
+    className: 'order-message__close-btn',
+    textContent: 'Закрыть',
+  });
+
+  orderMessageWrapper.append(orderMessageText, orderMessageColseBtn);
+
+  document.body.append(orderMessageWrapper);
+};

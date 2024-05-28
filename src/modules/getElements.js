@@ -15,3 +15,4 @@ export const cartTotalPrice =
 export const getItemPriceElem = (item) =>
   item.querySelector('.cart-item__price');
 export const getItemCount = (item) => item.querySelector('.cart-item__num');
+export const cartForm = modalOverlay.querySelector('.modal-cart__form');

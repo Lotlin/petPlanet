@@ -1,0 +1,26 @@
+@use "../variables" as *;
+
+.order-message {
+  z-index: 1000;
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba($black, .4);
+  text-align: center;
+
+  &____text {
+    margin-bottom: 20px;
+  }
+
+  &__close-btn {
+    padding: 10px 20px;
+    background-color: $carrot;
+    border-radius: 6px;
+    color: $light;
+  }
+}

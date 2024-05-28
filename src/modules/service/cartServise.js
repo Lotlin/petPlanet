@@ -1,6 +1,8 @@
-import {cartCount} from '../getElements';
-import {fetchAllProductsById} from './fetch';
-import {renderCartIsEmptyMessage} from '../render/renderCart';
+import {cartCount, cartForm, modalOverlay} from '../getElements';
+import {fetchAllProductsById, fetchPostOrder} from './fetch';
+import {
+  renderCartIsEmptyMessage, renderOrderMessage,
+} from '../render/renderCart';
 
 export const isTheSameProduct = (localStorageCartItems, productId) =>
   localStorageCartItems.find(
@@ -20,6 +22,10 @@ export const getLocalStorageCartItems = () =>
 
 export const getProductInCart = (cartItems, productId) =>
   cartItems.find((item) => item.id === productId);
+
+export const clearLocalStorageCartItems = () => {
+  localStorage.removeItem('cartItems');
+};
 
 export const addProductToLocalStorage = (cartItems, producId, productPrice) => {
   const productInCart = getProductInCart(cartItems, producId);
@@ -141,4 +147,24 @@ export const isCoutBtnClicked = (target) => {
   }
 
   return clickedBtn;
+};
+
+export const submitOrder = async e => {
+  e.preventDefault();
+
+  const cartItems = getLocalStorageCartItems();
+  const products = cartItems.map(({id, count}) => ({
+    id,
+    quantity: count,
+  }));
+
+  const storeId = cartForm.store.value;
+
+  const {orderId} = await fetchPostOrder({products, storeId});
+  renderOrderMessage(orderId);
+
+  modalOverlay.classList.remove('modal-overlay--active');
+
+  clearLocalStorageCartItems();
+  updateCartCount();
 };

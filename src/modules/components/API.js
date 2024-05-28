@@ -7,3 +7,4 @@ export const CAREGORIES_NAME = {
   food: 'Корма',
 };
 export const GET_ALL_PRODUCTS_URL = 'api/products/list';
+export const POST_ORDER_URL = 'api/orders';
