@@ -1,8 +1,13 @@
-import {cartCount, cartForm, modalOverlay} from '../getElements';
+import {
+  cartCount, cartForm, cartSubmitBtn, getCloseOrderMessageBtn, getOrderMessage,
+  modalOverlay,
+} from '../getElements';
 import {fetchAllProductsById, fetchPostOrder} from './fetch';
 import {
-  renderCartIsEmptyMessage, renderOrderMessage,
+  renderCartIsEmptyMessage,
+  renderOrderMessageModal,
 } from '../render/renderCart';
+import {disableElem} from '../util.js';
 
 export const isTheSameProduct = (localStorageCartItems, productId) =>
   localStorageCartItems.find(
@@ -122,6 +127,7 @@ export const updateItemPriceAndCount =
       const сartItems = getLocalStorageCartItems();
       if (!сartItems.length) {
         renderCartIsEmptyMessage();
+        disableElem(cartSubmitBtn);
       }
 
       return;
@@ -161,10 +167,15 @@ export const submitOrder = async e => {
   const storeId = cartForm.store.value;
 
   const {orderId} = await fetchPostOrder({products, storeId});
-  renderOrderMessage(orderId);
+  renderOrderMessageModal(orderId);
 
   modalOverlay.classList.remove('modal-overlay--active');
 
   clearLocalStorageCartItems();
   updateCartCount();
+
+  const closeOrderMessageBtn = getCloseOrderMessageBtn();
+  closeOrderMessageBtn.addEventListener('click', () => {
+    getOrderMessage().remove();
+  });
 };

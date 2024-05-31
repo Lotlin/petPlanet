@@ -16,3 +16,8 @@ export const getItemPriceElem = (item) =>
   item.querySelector('.cart-item__price');
 export const getItemCount = (item) => item.querySelector('.cart-item__num');
 export const cartForm = modalOverlay.querySelector('.modal-cart__form');
+export const cartSubmitBtn = modalOverlay.querySelector('.modal-cart__btn');
+
+export const getOrderMessage = () => document.querySelector('.order-message');
+export const getCloseOrderMessageBtn = () =>
+  document.querySelector('.order-message__close-btn');

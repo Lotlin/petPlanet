@@ -1,9 +1,7 @@
 import {API_URL} from '../components/API';
-import {cartItemsList, cartTotalPrice} from '../getElements';
-import {createElement} from '../util';
-import {
-  countCartPrices, updateCountFetchedItems,
-} from '../service/cartServise';
+import {cartItemsList, cartSubmitBtn, cartTotalPrice} from '../getElements';
+import {activateElem, createElement, getDeliveryDate} from '../util';
+import {countCartPrices, updateCountFetchedItems} from '../service/cartServise';
 
 const renderCartItem = ({photoUrl, name, count, price, id}) => {
   const item = createElement('li', {
@@ -86,9 +84,10 @@ export const renderCart = async () => {
 
   renderCartItems(cartItemsData);
   renderTotalPrice(cartItemsData);
+  activateElem(cartSubmitBtn);
 };
 
-export const renderOrderMessage = (orderId) => {
+export const renderOrderMessageModal = (orderId) => {
   const orderMessageWrapper = createElement('div', {
     className: 'order-message',
   });
@@ -96,7 +95,7 @@ export const renderOrderMessage = (orderId) => {
   const orderMessageText = createElement('p', {
     className: 'order-message__text',
     textContent: `Ваш заказ с номером ${orderId} принят.
-      Вы можете его забрать завтра после 12:00.`,
+      Вы можете его забрать ${getDeliveryDate()} после 12:00.`,
   });
 
   const orderMessageColseBtn = createElement('button', {

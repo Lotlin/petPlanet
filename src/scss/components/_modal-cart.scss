@@ -40,9 +40,6 @@
     margin-bottom: 24px;
   }
 
-  &__form {
-  }
-
   &__fieldset {
     margin: 0;
     padding: 0;
@@ -76,6 +73,10 @@
     color: $light;
     font-size: 16px;
     font-weight: 700;
+
+    &:disabled {
+      opacity: 0.4;
+    }
   }
 
   &__total-price {
