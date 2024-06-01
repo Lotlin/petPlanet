@@ -1,4 +1,4 @@
-import {API_URL} from '../components/API';
+import {API_URL} from '../data/API';
 import {storeProductList} from '../getElements';
 import {fetchProductsByCategory} from '../service/fetch';
 import {createElement} from '../util';

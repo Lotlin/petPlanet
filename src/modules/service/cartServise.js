@@ -1,10 +1,11 @@
 import {
   cartCount, cartForm, cartSubmitBtn, getCloseOrderMessageBtn, getOrderMessage,
-  modalOverlay,
+  modalOverlay, getStoreProductPriceElem, modalOverlayCloseBtn,
+  getItemPriceElem, getItemCountElem,
 } from '../getElements';
 import {fetchAllProductsById, fetchPostOrder} from './fetch';
 import {
-  renderCartIsEmptyMessage,
+  renderCartIsEmptyMessage, renderCart, renderTotalPrice,
   renderOrderMessageModal,
 } from '../render/renderCart';
 import {disableElem} from '../util.js';
@@ -141,7 +142,7 @@ export const updateItemPriceAndCount =
     priceElem.textContent = `${newCount * oneItemPrice}\u00A0₽`;
   };
 
-export const isCoutBtnClicked = (target) => {
+export const isCountBtnClicked = target => {
   let clickedBtn = false;
 
   if (target.classList.contains('cart-item__num-btn--minus')) {
@@ -153,6 +154,70 @@ export const isCoutBtnClicked = (target) => {
   }
 
   return clickedBtn;
+};
+
+export const isUserWantsToCloseCartModal = target =>
+  target === modalOverlay || target === modalOverlayCloseBtn;
+
+
+export const isClickedStoreProductAddToCartBtn = target =>
+  target.closest('.product__add-cart-btn');
+
+export const openCart = () => {
+  modalOverlay.classList.add('modal-overlay--active');
+
+  renderCart();
+};
+
+export const closeCart = () => {
+  modalOverlay.classList.remove('modal-overlay--active');
+};
+
+export const getRenderedStoreProductPriceValue = target => {
+  const parentItem = target.closest('.store__product');
+  const productPriceElem = getStoreProductPriceElem(parentItem);
+  const productPrice = Number(getElemPrice(productPriceElem));
+
+  return productPrice;
+};
+
+export const getCartItemRenderedElements = (item) => {
+  const priceElem = getItemPriceElem(item);
+  const countElem = getItemCountElem(item);
+
+  return {
+    priceElem,
+    countElem,
+  };
+};
+
+export const cartItemCountService = (target, clickedCountdBtn) => {
+  const item = target.closest('.cart-item');
+  const itemId = getItemId(item);
+
+  const itemPriceELem = getCartItemRenderedElements(item).priceElem;
+  const itemCountElem = getCartItemRenderedElements(item).countElem;
+
+  const cartItems = getLocalStorageCartItems();
+
+  if (clickedCountdBtn === 'increase') {
+    increaseCountLocalStorageCartItem(cartItems, itemId);
+    updateItemPriceAndCount(item, itemPriceELem, itemCountElem, 'increase');
+  } else {
+    reduceCountLocalStorageCartItem(cartItems, itemId);
+    updateItemPriceAndCount(item, itemPriceELem, itemCountElem);
+  }
+
+  const newCartItems = getLocalStorageCartItems();
+  renderTotalPrice(newCartItems);
+};
+
+export const addStoreProductToCart = (target) => {
+  const storeProductId = parseInt(target.dataset.id);
+  const soreProductPrice = getRenderedStoreProductPriceValue(target);
+
+  addToCart(storeProductId, soreProductPrice);
+  updateCartCount();
 };
 
 export const submitOrder = async e => {

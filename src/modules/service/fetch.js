@@ -1,6 +1,6 @@
 import {
   API_URL, CATEGORIES_URL, GET_ALL_PRODUCTS_URL, POST_ORDER_URL,
-} from '../components/API';
+} from '../data/API';
 
 export const fetchProductsByCategory = async category => {
   try {

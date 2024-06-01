@@ -3,7 +3,7 @@ export const cartBtn = document.querySelector('.store__cart-btn');
 export const cartCount = cartBtn.querySelector('.store__cart-cnt');
 
 export const storeProductList = document.querySelector('.store__list');
-export const getStoreProductPrice = (storeProduct) =>
+export const getStoreProductPriceElem = (storeProduct) =>
   storeProduct.querySelector('.product__price');
 
 export const modalOverlay = document.querySelector('.modal-overlay');
@@ -14,7 +14,7 @@ export const cartTotalPrice =
   modalOverlay.querySelector('.modal-cart__total-price');
 export const getItemPriceElem = (item) =>
   item.querySelector('.cart-item__price');
-export const getItemCount = (item) => item.querySelector('.cart-item__num');
+export const getItemCountElem = (item) => item.querySelector('.cart-item__num');
 export const cartForm = modalOverlay.querySelector('.modal-cart__form');
 export const cartSubmitBtn = modalOverlay.querySelector('.modal-cart__btn');
 

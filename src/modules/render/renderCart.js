@@ -1,4 +1,4 @@
-import {API_URL} from '../components/API';
+import {API_URL} from '../data/API';
 import {cartItemsList, cartSubmitBtn, cartTotalPrice} from '../getElements';
 import {activateElem, createElement, getDeliveryDate} from '../util';
 import {countCartPrices, updateCountFetchedItems} from '../service/cartServise';
