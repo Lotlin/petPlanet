@@ -50,9 +50,19 @@
     border: 1px solid $green;
     border-radius: 6px;
     color: inherit;
-  }
 
-  &__num {
+    &:hover {
+      background-color: $green;
+      color: $white;
+    }
+
+    &:focus-visible {
+      outline: 1px solid $carrot;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 
   &__price {

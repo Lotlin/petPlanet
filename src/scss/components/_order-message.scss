@@ -18,9 +18,22 @@
   }
 
   &__close-btn {
-    padding: 10px 20px;
+    padding: 16px 24px;
     background-color: $carrot;
-    border-radius: 6px;
+    border-radius: 30px;
     color: $light;
+    outline: 1px solid transparent;
+
+    &:hover {
+      background-color: $purple;
+    }
+
+    &:focus-visible {
+      outline: 1px solid $purple;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }

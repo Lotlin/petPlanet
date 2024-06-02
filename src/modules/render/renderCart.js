@@ -28,6 +28,7 @@ const renderCartItem = ({photoUrl, name, count, price, id}) => {
   const btnMinus = createElement('button', {
     classList: 'cart-item__num-btn cart-item__num-btn--minus',
     textContent: '-',
+    ariaLabel: 'уменьшает количество товара в корзине на 1',
   });
 
   const numElem = createElement('span', {
@@ -38,6 +39,7 @@ const renderCartItem = ({photoUrl, name, count, price, id}) => {
   const btnPlus = createElement('button', {
     classList: 'cart-item__num-btn cart-item__num-btn--plus',
     textContent: '+',
+    ariaLabel: 'увеличивает количество товара в корзине на 1',
   });
 
   numWrapper.append(btnMinus, numElem, btnPlus);

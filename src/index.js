@@ -12,5 +12,3 @@ const init = async () => {
 };
 
 init();
-
-// toDo эффекты hover/focus/active

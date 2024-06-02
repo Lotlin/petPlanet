@@ -238,6 +238,7 @@ export const submitOrder = async e => {
 
   clearLocalStorageCartItems();
   updateCartCount();
+  disableElem(cartSubmitBtn);
 
   const closeOrderMessageBtn = getCloseOrderMessageBtn();
   closeOrderMessageBtn.addEventListener('click', () => {

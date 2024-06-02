@@ -60,5 +60,18 @@
     color: $light;
     font-weight: 700;
     text-align: center;
+    outline: 1px solid transparent;
+
+    &:hover {
+      background-color: #9A07DF;
+    }
+
+    &:focus-visible {
+      outline: 1px solid $carrot;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }

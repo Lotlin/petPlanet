@@ -38,6 +38,19 @@
     position: relative;
     padding-bottom: 8px;
     color: $carrot;
+    outline: 1px solid transparent;
+
+    &:hover {
+      color: $green;
+    }
+
+    &:focus-visible {
+      outline: 1px solid $green;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
 
     &::after {
       position: absolute;
@@ -66,6 +79,18 @@
     display: block;
     width: 28px;
     height: 28px;
+
+    &:hover .store__cart-icon-content {
+      fill: $green;
+    } 
+
+    &:focus-visible {
+      outline: 1px solid $green;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 
   &__cart-cnt {
