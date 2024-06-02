@@ -2,59 +2,31 @@ import {
   API_URL, CATEGORIES_URL, GET_ALL_PRODUCTS_URL, POST_ORDER_URL,
 } from '../data/API';
 
-export const fetchProductsByCategory = async category => {
+const fetchData = async (endpoint, option = {}) => {
   try {
-    const response = await fetch(`${API_URL}/${CATEGORIES_URL}/${category}`);
+    const response = await fetch(`${API_URL}/${endpoint}`, option);
 
     if (!response.ok) {
       throw new Error(response.status);
     }
 
-    const products = await response.json();
-
-    return products;
+    return await response.json();
   } catch (err) {
-    console.error(`Ошибка запроса товаров: ${err}`);
+    console.error(`Ошибка запроса ${err}`);
   }
 };
 
-export const fetchAllProductsById = async productsIds => {
-  try {
-    const response = await fetch(
-        `${API_URL}/${GET_ALL_PRODUCTS_URL}/${productsIds.join(',')}`,
-    );
+export const fetchProductsByCategory = category =>
+  fetchData(`${CATEGORIES_URL}/${category}`);
 
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
 
-    const products = await response.json();
+export const fetchAllProductsById = productsIds =>
+  fetchData(`/${GET_ALL_PRODUCTS_URL}/${productsIds.join(',')}`);
 
-    return products;
-  } catch (err) {
-    console.error(`Ошибка запроса товаров: ${err}`);
-    return [];
-  }
-};
-
-export const fetchPostOrder = async (orderData) => {
-  try {
-    const response = await fetch(`${API_URL}/${POST_ORDER_URL}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(orderData),
-    });
-
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-
-    const result = await response.json();
-
-    return result;
-  } catch (error) {
-    console.error(`Ошибка оформления заказа: ${error}`);
-  }
-};
+export const fetchPostOrder = (orderData) => fetchData(POST_ORDER_URL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(orderData),
+});
